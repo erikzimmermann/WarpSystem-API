@@ -9,7 +9,7 @@ public class Options {
     private int mask = 0;
 
     private final IDestination destination;
-    private String displayName;
+    private final String displayName;
     private String permission;
     private Double costs;
     private Integer delay;
