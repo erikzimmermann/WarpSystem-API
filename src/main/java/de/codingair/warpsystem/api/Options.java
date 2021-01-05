@@ -42,92 +42,91 @@ public class Options {
     }
 
     public @NotNull String displayName(String def) {
-        if(modified(0)) return def;
         return displayName;
     }
 
     public String permission(String def) {
-        if(modified(1)) return def;
+        if(modified(0)) return def;
         return permission;
     }
 
     public Double costs(double def) {
-        if(modified(2)) return def;
+        if(modified(1)) return def;
         return costs;
     }
 
     public Integer delay(int def) {
-        if(modified(3)) return def;
+        if(modified(2)) return def;
         return delay;
     }
 
     public Vector randomOffset(Vector def) {
-        if(modified(4)) return def;
+        if(modified(3)) return def;
         return randomOffset;
     }
 
     public Boolean skip(boolean def) {
-        if(modified(5)) return def;
+        if(modified(4)) return def;
         return skip;
     }
 
     public Boolean canMove(boolean def) {
-        if(modified(6)) return def;
+        if(modified(5)) return def;
         return canMove;
     }
 
     public Boolean waitForTeleport(boolean def) {
-        if(modified(7)) return def;
+        if(modified(6)) return def;
         return waitForTeleport;
     }
 
     public Boolean confirmPayment(boolean def) {
-        if(modified(8)) return def;
+        if(modified(7)) return def;
         return confirmPayment;
     }
 
     public String payMessage(String def) {
-        if(modified(9)) return def;
+        if(modified(8)) return def;
         return payMessage;
     }
 
     public String paymentDeniedMessage(String def) {
-        if(modified(10)) return def;
+        if(modified(9)) return def;
         return paymentDeniedMessage;
     }
 
     public String message(String def) {
-        if(modified(11)) return def;
+        if(modified(10)) return def;
         return message;
     }
 
     public String serverNotOnline(String def) {
-        if(modified(12)) return def;
+        if(modified(11)) return def;
         return serverNotOnline;
     }
 
     public SoundData teleportSound(SoundData def) {
-        if(modified(13)) return def;
+        if(modified(12)) return def;
         return teleportSound;
     }
 
     public SoundData cancelSound(SoundData def) {
-        if(modified(14)) return def;
+        if(modified(13)) return def;
         return cancelSound;
     }
 
     public Boolean afterEffects(boolean def) {
-        if(modified(15)) return def;
+        if(modified(14)) return def;
         return afterEffects;
     }
 
     public Boolean publicAnimations(boolean def) {
-        if(modified(16)) return def;
+        if(modified(15)) return def;
         return publicAnimations;
     }
 
     public Boolean teleportAnimation(boolean def) {
-        if(modified(17)) return def;
+        if(modified(16)) return def;
         return teleportAnimation;
     }
 
