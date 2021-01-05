@@ -41,7 +41,7 @@ public class Options {
         return destination;
     }
 
-    public @NotNull String displayName(String def) {
+    public @NotNull String displayName() {
         return displayName;
     }
 
