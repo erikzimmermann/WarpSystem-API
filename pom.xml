@@ -6,7 +6,7 @@
 
     <groupId>com.github.CodingAir</groupId>
     <artifactId>WarpSystem-API</artifactId>
-    <version>4.2.12</version>
+    <version>4.2.13</version>
 
     <repositories>
         <repository>
