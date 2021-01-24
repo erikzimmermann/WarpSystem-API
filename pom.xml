@@ -46,8 +46,8 @@
         </dependency>
         <dependency>
             <groupId>com.github.CodingAir</groupId>
-            <artifactId>CodingApi</artifactId>
-            <version>1.8</version>
+            <artifactId>CodingAPI</artifactId>
+            <version>1.9</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
