@@ -13,6 +13,7 @@ The corresponding API to [WarpSystem](https://github.com/CodingAir/WarpSystem-Is
   <groupId>com.github.CodingAir</groupId>
   <artifactId>WarpSystem-API</artifactId>
   <version>5.0.6</version>
+    <scope>provided</scope>
 </dependency>
 
 <!-- Important: This API is necessary for compiling your plugin -->
