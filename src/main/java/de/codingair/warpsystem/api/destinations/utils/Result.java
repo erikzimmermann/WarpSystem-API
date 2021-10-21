@@ -1,4 +1,4 @@
-package de.codingair.warpsystem.api;
+package de.codingair.warpsystem.api.destinations.utils;
 
 public enum Result {
     SUCCESS,
@@ -9,6 +9,7 @@ public enum Result {
     NO_PERMISSION,
     SERVER_NOT_AVAILABLE,
     CANCELLED_BY_SYSTEM,
+    CANCELLED_BY_EXTERNAL,
     NO_CONNECTED_PROXY,
     ERROR,
     ALREADY_ON_TARGET_SERVER,

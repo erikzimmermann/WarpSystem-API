@@ -1,317 +1,287 @@
 package de.codingair.warpsystem.api;
 
 import de.codingair.codingapi.server.sounds.SoundData;
-import org.bukkit.util.Vector;
+import de.codingair.codingapi.tools.Callback;
+import de.codingair.warpsystem.api.destinations.utils.IDestination;
+import de.codingair.warpsystem.api.destinations.utils.Origin;
+import de.codingair.warpsystem.api.destinations.utils.Result;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class Options {
-    private int mask = 0;
-
-    private final IDestination destination;
-    private final String displayName;
-    private String permission;
-    private Double costs;
-    private Integer delay;
-    private Vector randomOffset;
-
-    private Boolean skip;
-    private Boolean canMove;
-    private Boolean waitForTeleport;
-    private Boolean confirmPayment;
-
-    private String payMessage;
-    private String paymentDeniedMessage;
-    private String message;
-    private String serverNotOnline;
-
-    private SoundData teleportSound;
-    private SoundData cancelSound;
-
-    private Boolean afterEffects;
-    private Boolean publicAnimations;
-    private Boolean teleportAnimation;
-
-    private Options(@NotNull IDestination destination, @NotNull String displayName) {
-        this.destination = destination;
-        this.displayName = displayName;
-    }
-
-    public @NotNull IDestination getDestination() {
-        return destination;
-    }
-
-    public @NotNull String displayName() {
-        return displayName;
-    }
-
-    public String permission(String def) {
-        if(modified(0)) return def;
-        return permission;
-    }
-
-    public Double costs(double def) {
-        if(modified(1)) return def;
-        return costs;
-    }
-
-    public Integer delay(int def) {
-        if(modified(2)) return def;
-        return delay;
-    }
-
-    public Vector randomOffset(Vector def) {
-        if(modified(3)) return def;
-        return randomOffset;
-    }
-
-    public Boolean skip(boolean def) {
-        if(modified(4)) return def;
-        return skip;
-    }
-
-    public Boolean canMove(boolean def) {
-        if(modified(5)) return def;
-        return canMove;
-    }
-
-    public Boolean waitForTeleport(boolean def) {
-        if(modified(6)) return def;
-        return waitForTeleport;
-    }
-
-    public Boolean confirmPayment(boolean def) {
-        if(modified(7)) return def;
-        return confirmPayment;
-    }
-
-    public String payMessage(String def) {
-        if(modified(8)) return def;
-        return payMessage;
-    }
-
-    public String paymentDeniedMessage(String def) {
-        if(modified(9)) return def;
-        return paymentDeniedMessage;
-    }
-
-    public String message(String def) {
-        if(modified(10)) return def;
-        return message;
-    }
-
-    public String serverNotOnline(String def) {
-        if(modified(11)) return def;
-        return serverNotOnline;
-    }
-
-    public SoundData teleportSound(SoundData def) {
-        if(modified(12)) return def;
-        return teleportSound;
-    }
-
-    public SoundData cancelSound(SoundData def) {
-        if(modified(13)) return def;
-        return cancelSound;
-    }
-
-    public Boolean afterEffects(boolean def) {
-        if(modified(14)) return def;
-        return afterEffects;
-    }
-
-    public Boolean publicAnimations(boolean def) {
-        if(modified(15)) return def;
-        return publicAnimations;
-    }
-
-    public Boolean teleportAnimation(boolean def) {
-        if(modified(16)) return def;
-        return teleportAnimation;
-    }
-
-    private boolean modified(int index) {
-        return ((this.mask >> index) & 1) != 1;
-    }
-
-    private void modify(int index) {
-        this.mask |= (1 << index);
-    }
+/**
+ * <p>An options class for all teleports via WarpSystem.</p>
+ * <p>A new instance can be created with {@link ITeleportManager#options()} by using {@link TeleportService#get()}.</p>
+ */
+public interface Options {
 
     /**
-     * All unmodified values will be replaced with default values of the WarpSystem configuration.
-     * @param destination The used destination.
-     * @return A new builder instance.
+     * @return Builds the location instance from the given destination if available.
      */
-    public static Builder newBuilder(@NotNull IDestination destination, @NotNull String displayName) {
-        return new Builder(destination, displayName);
-    }
+    @Nullable
+    Location buildLocation();
 
-    public static class Builder {
-        private final Options options;
+    /**
+     * Destroys the content of this instance.
+     */
+    @NotNull
+    Options destroy();
 
-        private Builder(@NotNull IDestination destination, @NotNull String displayName) {
-            this.options = new Options(destination, displayName);
-        }
+    /**
+     * @return The origin of the teleport.
+     */
+    @NotNull
+    Origin getOrigin();
 
-        /**
-         * @param permission Permission which will be checked by WarpSystem.
-         */
-        public Builder permission(@Nullable String permission) {
-            options.permission = permission;
-            options.modify(1);
-            return this;
-        }
+    /**
+     * @return The destination of the teleport.
+     */
+    @NotNull
+    IDestination getDestination();
 
-        /**
-         * @param costs Costs to pay for this teleportation.
-         */
-        public Builder costs(double costs) {
-            if(costs < 0) throw new IllegalArgumentException("Costs must be >= 0. Was: " + costs);
-            options.costs = costs;
-            options.modify(2);
-            return this;
-        }
+    /**
+     * Overwrites the given destination.
+     *
+     * @param destination The new destination
+     */
+    @NotNull
+    Options setDestination(@NotNull IDestination destination);
 
-        /**
-         * @param delay The delay for the teleportation process.
-         */
-        public Builder delay(int delay) {
-            if(delay < 0) throw new IllegalArgumentException("Delay must be >= 0. Was: " + delay);
-            options.delay = delay;
-            options.modify(3);
-            return this;
-        }
+    /**
+     * @return The current display name of the given destination if available.
+     */
+    @Nullable
+    String getDisplayName();
 
-        /**
-         * @param randomOffset A random offset which can be applied to the destination's location.
-         */
-        public Builder randomOffset(@NotNull Vector randomOffset) {
-            options.randomOffset = randomOffset;
-            options.modify(4);
-            return this;
-        }
+    /**
+     * Overwrites the given destination display name.
+     *
+     * @param displayName The new destination display name.
+     */
+    @NotNull
+    Options setDisplayName(@Nullable String displayName);
 
-        /**
-         * @param skip Can be enabled if the player should skip the teleportation waiting process.
-         */
-        public Builder skip(boolean skip) {
-            options.skip = skip;
-            options.modify(5);
-            return this;
-        }
+    /**
+     * @return The current permission if available.
+     */
+    @Nullable
+    String getPermission();
 
-        /**
-         * @param canMove Describes whether the player is able to move during the waiting process of this teleportation.
-         */
-        public Builder canMove(boolean canMove) {
-            options.canMove = canMove;
-            options.modify(6);
-            return this;
-        }
+    /**
+     * Overwrites the given permission.
+     *
+     * @param permission The new permission.
+     */
+    @NotNull
+    Options setPermission(@Nullable String permission);
 
-        /**
-         * @param waitForTeleport If enabled and this teleportation will be executed while the player is moving, the player will be notified to stand still to get teleported.
-         */
-        public Builder waitForTeleport(boolean waitForTeleport) {
-            options.waitForTeleport = waitForTeleport;
-            options.modify(7);
-            return this;
-        }
+    /**
+     * @param player The given player.
+     * @return The current costs for the specific player. Might be zero if the player has the teleport costs bypass permission.
+     */
+    double getCosts(@NotNull Player player);
 
-        /**
-         * @param confirmPayment When enabled, the player must confirm the payment (when costs > 0) by toggle sneaking.
-         */
-        public Builder confirmPayment(boolean confirmPayment) {
-            options.confirmPayment = confirmPayment;
-            options.modify(8);
-            return this;
-        }
+    /**
+     * Overwrites the given costs.
+     *
+     * @param costs The new costs.
+     */
+    @NotNull
+    Options setCosts(double costs);
 
-        /**
-         * @param payMessage The pay message. Contains following placeholders: %warp%, %AMOUNT% and %player%
-         */
-        public Builder payMessage(@Nullable String payMessage) {
-            options.payMessage = payMessage;
-            options.modify(9);
-            return this;
-        }
+    /**
+     * @param player The given player.
+     * @return The final costs for the specific player. Might be zero if the player has the teleport costs bypass permission, no economy system is available or costs are negative.
+     */
+    @NotNull
+    Number getFinalCosts(@NotNull Player player);
 
-        /**
-         * @param paymentDeniedMessage The message when the player denies the payment. Contains following placeholders: %AMOUNT%
-         */
-        public Builder paymentDeniedMessage(@Nullable String paymentDeniedMessage) {
-            options.paymentDeniedMessage = paymentDeniedMessage;
-            options.modify(10);
-            return this;
-        }
+    /**
+     * @return Whether the teleport delay should be skipped or not. Default is false.
+     */
+    boolean isSkip();
 
-        /**
-         * @param message The teleport message. Contains following placeholders: %warp% and %player%
-         */
-        public Builder message(@Nullable String message) {
-            options.message = message;
-            options.modify(11);
-            return this;
-        }
+    /**
+     * @return The current set skip value. Default is null.
+     */
+    @Nullable
+    Boolean getSkip();
 
+    /**
+     * @param skip The new skip value.
+     */
+    @NotNull
+    Options setSkip(boolean skip);
 
-        /**
-         * @param serverNotOnline An error message when target server is not online (destination specific).
-         */
-        public Builder serverNotOnline(@Nullable String serverNotOnline) {
-            options.serverNotOnline = serverNotOnline;
-            options.modify(12);
-            return this;
-        }
+    /**
+     * @return Whether the player can move during the teleport delay or not.
+     */
+    boolean isCanMove();
 
-        /**
-         * @param teleportSound Sound when the player will be teleported.
-         */
-        public Builder teleportSound(@Nullable SoundData teleportSound) {
-            options.teleportSound = teleportSound;
-            options.modify(13);
-            return this;
-        }
+    /**
+     * @param canMove Whether the player should be able to move during the teleport delay or not.
+     */
+    @NotNull
+    Options setCanMove(boolean canMove);
 
-        /**
-         * @param cancelSound Sound when the teleportation will be cancelled.
-         */
-        public Builder cancelSound(@Nullable SoundData cancelSound) {
-            options.cancelSound = cancelSound;
-            options.modify(14);
-            return this;
-        }
+    /**
+     * @return Whether the teleport process waits until the player stands still or directly starts after running the teleport method.
+     */
+    boolean isWaitForTeleport();
 
-        /**
-         * @param afterEffects Particle effects when completing the teleportation.
-         */
-        public Builder afterEffects(boolean afterEffects) {
-            options.afterEffects = afterEffects;
-            options.modify(15);
-            return this;
-        }
+    /**
+     * @param waitForTeleport Whether the teleport process should wait until the player stands still or directly start after running the teleport method.
+     */
+    @NotNull
+    Options setWaitForTeleport(boolean waitForTeleport);
 
-        /**
-         * @param publicAnimations Decided whether all particle effects should be visible for all online players in range.
-         */
-        public Builder publicAnimations(boolean publicAnimations) {
-            options.publicAnimations = publicAnimations;
-            options.modify(16);
-            return this;
-        }
+    /**
+     * @return The current teleport message.
+     */
+    @Nullable
+    String getMessage();
 
-        /**
-         * @param teleportAnimation If enabled, teleport animation particles will be shown.
-         */
-        public Builder teleportAnimation(boolean teleportAnimation) {
-            options.teleportAnimation = teleportAnimation;
-            options.modify(17);
-            return this;
-        }
+    /**
+     * @param message The new teleport message. The message will be sent as it will be stored in this instance without any modifications for things like prefixes.
+     */
+    @NotNull
+    Options setMessage(@Nullable String message);
 
-        public Options build() {
-            return options;
-        }
-    }
+    /**
+     * @return The current teleport sound.
+     */
+    @Nullable
+    SoundData getTeleportSound();
+
+    /**
+     * @param teleportSound The new teleport sound.
+     */
+    @NotNull
+    Options setTeleportSound(@Nullable SoundData teleportSound);
+
+    /**
+     * @return Whether an animation should be played after teleport or not.
+     */
+    boolean isAfterEffects();
+
+    /**
+     * @param afterEffects Whether an animation should be played after teleport or not.
+     * @param force        Force updates the current value if there is already one. The current value will not be overwritten if force is set to false.
+     */
+    @NotNull
+    Options setAfterEffects(boolean afterEffects, boolean force);
+
+    /**
+     * @return Whether this teleport is already finished or not.
+     */
+    boolean expired();
+
+    /**
+     * @param callback A new callback which will be fired when the teleport will be finished or cancelled.
+     * @return This options-instance.
+     */
+    @NotNull
+    Options addCallback(@NotNull Callback<Result> callback);
+
+    /**
+     * @return The current pay message.
+     */
+    @Nullable
+    String getPayMessage();
+
+    /**
+     * @param payMessage The new pay message.
+     */
+    @NotNull
+    Options setPayMessage(@Nullable String payMessage);
+
+    /**
+     * @param player The specific player.
+     * @return The final message. This depends on whether the player must pay something or not. Includes {@link Options#getMessage()} and {@link Options#getPayMessage()}.
+     */
+    @Nullable
+    String getFinalMessage(@NotNull Player player);
+
+    /**
+     * @return Whether the player should confirm the payment (if there is one) to start the teleport or not.
+     */
+    boolean isConfirmPayment();
+
+    /**
+     * @param confirmPayment Whether the player should confirm the payment (if there is one) to start the teleport or not.
+     */
+    @NotNull
+    Options setConfirmPayment(boolean confirmPayment);
+
+    /**
+     * @param player The specific player.
+     * @return The message if the payment (if there was one) has been denied.
+     */
+    @Nullable
+    String getPaymentDeniedMessage(@NotNull Player player);
+
+    /**
+     * @param paymentDeniedMessage The message if the payment (if there was one) has been denied.
+     */
+    @NotNull
+    Options setPaymentDeniedMessage(@Nullable String paymentDeniedMessage);
+
+    /**
+     * @return Whether there should be a teleport animation during teleport delay or not.
+     */
+    boolean isTeleportAnimation();
+
+    /**
+     * @param teleportAnimation Whether there should be a teleport animation during teleport delay or not.
+     */
+    @NotNull
+    Options setTeleportAnimation(boolean teleportAnimation);
+
+    /**
+     * @return The message that comes up if the target server is not online.
+     */
+    @Nullable
+    String getServerNotOnline();
+
+    /**
+     * @param serverNotOnline The message that comes up if the target server is not online.
+     */
+    @NotNull
+    Options setServerNotOnline(@Nullable String serverNotOnline);
+
+    /**
+     * @return Whether the teleport animation will be shown for the entire server or just the teleporting player.
+     */
+    boolean isPublicAnimations();
+
+    /**
+     * @param publicAnimations Whether the teleport animation will be shown for the entire server or just the teleporting player.
+     */
+    @NotNull
+    Options setPublicAnimations(boolean publicAnimations);
+
+    /**
+     * @return The current cancel sound.
+     */
+    @Nullable
+    SoundData getCancelSound();
+
+    /**
+     * @param cancelSound The new cancel sound.
+     */
+    @NotNull
+    Options setCancelSound(@Nullable SoundData cancelSound);
+
+    /**
+     * @param player The specific player.
+     * @return The teleport delay for the given player. Might be zero if the player has the teleport delay bypass permission.
+     */
+    int getDelay(@NotNull Player player);
+
+    /**
+     * @param delay The new delay.
+     */
+    @NotNull
+    Options setDelay(int delay);
 }

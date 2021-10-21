@@ -1,18 +1,33 @@
 package de.codingair.warpsystem.api;
 
+import org.jetbrains.annotations.NotNull;
+
 public class TeleportService {
     private static ITeleportManager instance;
 
-    public static ITeleportManager getInstance() {
+    /**
+     * @return The teleport manager of WarpSystem.
+     */
+    public static ITeleportManager get() {
         return instance;
     }
 
-    public static void setInstance(ITeleportManager instance) {
+    /**
+     * This will automatically be used by the WarpSystem itself. Please do not overwriter it.
+     *
+     * @param instance The new teleport instance.
+     */
+    public static void set(@NotNull ITeleportManager instance) {
         TeleportService.instance = instance;
     }
 
-    public static void setInstanceIfAbsent(ITeleportManager instance) {
-        if(TeleportService.instance != null) return;
-        setInstance(instance);
+    /**
+     * This will automatically be used by the WarpSystem itself. Please do not overwriter it.
+     *
+     * @param instance The new teleport instance.
+     */
+    public static void setIfAbsent(@NotNull ITeleportManager instance) {
+        if (TeleportService.instance != null) return;
+        set(instance);
     }
 }
