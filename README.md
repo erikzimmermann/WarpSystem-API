@@ -1,6 +1,6 @@
 # WarpSystem-API
 [![](https://jitpack.io/v/CodingAir/WarpSystem-API.svg)](https://jitpack.io/#CodingAir/WarpSystem-API)  
-The corresponding API to [WarpSystem](https://www.spigotmc.org/resources/warps-portals-and-more-warp-teleport-system-1-8-1-17.29595/).  
+The corresponding API to [WarpSystem](https://github.com/CodingAir/WarpSystem-IssueTracker).  
 
 ### Maven 
 ```xml
