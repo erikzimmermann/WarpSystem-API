@@ -31,7 +31,7 @@ The corresponding API to [WarpSystem](https://github.com/CodingAir/WarpSystem-Is
 ### Event example
 ```java
 @EventHandler
-public void onWarp(PlayerPreTeleportEvent e) {
+public void onWarp(AsyncPlayerTeleportEvent e) {
     IDestination destination = e.getOptions().getDestination();
     Location location = destination.buildLocation();
     
@@ -39,6 +39,17 @@ public void onWarp(PlayerPreTeleportEvent e) {
         e.setCancelled(true);
         e.getPlayer().sendMessage("§cWarps §8» §7This area is §ccurrently unavailable§7.");
     }
+}
+
+@EventHandler
+public void onTeleport(AsyncPlayerTeleportEvent e) {
+    IDestination destination = e.getOptions().getDestination();
+    String targetServer = destination.getTargetServer();
+
+    boolean onSameServer = targetServer == null;
+    if (onSameServer) return;
+
+    if (isOffline(targetServer)) startSync(targetServer);
 }
 ```
 
