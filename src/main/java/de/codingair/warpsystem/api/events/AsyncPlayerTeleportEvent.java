@@ -8,7 +8,7 @@ import org.bukkit.event.HandlerList;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Will be fired when the player is about to start a teleport.
+ * Will be fired when the player is about to start a teleport through WarpSystem.
  */
 public class AsyncPlayerTeleportEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
