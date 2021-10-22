@@ -12,7 +12,7 @@ The corresponding API to [WarpSystem](https://github.com/CodingAir/WarpSystem-Is
 <dependency>  
   <groupId>com.github.CodingAir</groupId>
   <artifactId>WarpSystem-API</artifactId>
-  <version>5.0.6</version>
+  <version>5.0.5</version>
   <scope>provided</scope>
 </dependency>
 
