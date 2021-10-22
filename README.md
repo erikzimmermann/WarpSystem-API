@@ -26,7 +26,7 @@ The corresponding API to [WarpSystem](https://github.com/CodingAir/WarpSystem-Is
 ```
 
 ### Event List
-* [PlayerPreTeleportEvent](https://github.com/CodingAir/WarpSystem-API/blob/master/src/main/java/de/codingair/warpsystem/api/events/PlayerPreTeleportEvent.java)
+* [AsyncPlayerTeleportEvent](https://github.com/CodingAir/WarpSystem-API/blob/master/src/main/java/de/codingair/warpsystem/api/events/AsyncPlayerTeleportEvent.java)
 
 ### Event example
 ```java
