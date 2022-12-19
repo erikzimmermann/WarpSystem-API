@@ -309,14 +309,14 @@ public interface Options {
     boolean withPostInvulnerability();
 
     /**
-     * @return The invulnerability time after teleport.
+     * @return The invulnerability time in seconds after teleport.
      */
     float postInvulnerabilityDuration();
 
     /**
      * PREMIUM-FEATURE This is a premium feature and therefore will not work if you are using the free version.
      *
-     * @param withPostInvulnerability Whether the player should recveive invulnerability after teleport or not.
+     * @param withPostInvulnerability Whether the player should receive invulnerability after teleport or not.
      * @return This options-instance.
      */
     @NotNull
@@ -325,9 +325,9 @@ public interface Options {
     /**
      * PREMIUM-FEATURE This is a premium feature and therefore will not work if you are using the free version.
      *
-     * @param postInvulnerabilityDuration The invulnerability time after teleport.
+     * @param postInvulnerabilityDuration The invulnerability time in seconds after teleport.
      * @return This options-instance.
      */
     @NotNull
-    Options setPostInvulnerabilityDuration(boolean postInvulnerabilityDuration);
+    Options setPostInvulnerabilityDuration(float postInvulnerabilityDuration);
 }
