@@ -24,6 +24,7 @@ public interface Options {
 
     /**
      * Destroys the content of this instance.
+     * @return This options-instance.
      */
     @NotNull
     Options destroy();
@@ -44,6 +45,7 @@ public interface Options {
      * Overwrites the given destination.
      *
      * @param destination The new destination
+     * @return This options-instance.
      */
     @NotNull
     Options setDestination(@NotNull IDestination destination);
@@ -58,6 +60,7 @@ public interface Options {
      * Overwrites the given destination display name.
      *
      * @param displayName The new destination display name.
+     * @return This options-instance.
      */
     @NotNull
     Options setDisplayName(@Nullable String displayName);
@@ -72,6 +75,7 @@ public interface Options {
      * Overwrites the given permission.
      *
      * @param permission The new permission.
+     * @return This options-instance.
      */
     @NotNull
     Options setPermission(@Nullable String permission);
@@ -86,6 +90,7 @@ public interface Options {
      * Overwrites the given costs.
      *
      * @param costs The new costs.
+     * @return This options-instance.
      */
     @NotNull
     Options setCosts(double costs);
@@ -110,6 +115,7 @@ public interface Options {
 
     /**
      * @param skip The new skip value.
+     * @return This options-instance.
      */
     @NotNull
     Options setSkip(boolean skip);
@@ -121,6 +127,7 @@ public interface Options {
 
     /**
      * @param canMove Whether the player should be able to move during the teleport delay or not.
+     * @return This options-instance.
      */
     @NotNull
     Options setCanMove(boolean canMove);
@@ -132,6 +139,7 @@ public interface Options {
 
     /**
      * @param waitForTeleport Whether the teleport process should wait until the player stands still or directly start after running the teleport method.
+     * @return This options-instance.
      */
     @NotNull
     Options setWaitForTeleport(boolean waitForTeleport);
@@ -144,6 +152,7 @@ public interface Options {
 
     /**
      * @param message The new teleport message. The message will be sent as it will be stored in this instance without any modifications for things like prefixes.
+     * @return This options-instance.
      */
     @NotNull
     Options setMessage(@Nullable String message);
@@ -156,6 +165,7 @@ public interface Options {
 
     /**
      * @param teleportSound The new teleport sound.
+     * @return This options-instance.
      */
     @NotNull
     Options setTeleportSound(@Nullable SoundData teleportSound);
@@ -168,6 +178,7 @@ public interface Options {
     /**
      * @param afterEffects Whether an animation should be played after teleport or not.
      * @param force        Force updates the current value if there is already one. The current value will not be overwritten if force is set to false.
+     * @return This options-instance.
      */
     @NotNull
     Options setAfterEffects(boolean afterEffects, boolean force);
@@ -192,6 +203,7 @@ public interface Options {
 
     /**
      * @param payMessage The new pay message.
+     * @return This options-instance.
      */
     @NotNull
     Options setPayMessage(@Nullable String payMessage);
@@ -210,6 +222,7 @@ public interface Options {
 
     /**
      * @param confirmPayment Whether the player should confirm the payment (if there is one) to start the teleport or not.
+     * @return This options-instance.
      */
     @NotNull
     Options setConfirmPayment(boolean confirmPayment);
@@ -223,6 +236,7 @@ public interface Options {
 
     /**
      * @param paymentDeniedMessage The message if the payment (if there was one) has been denied.
+     * @return This options-instance.
      */
     @NotNull
     Options setPaymentDeniedMessage(@Nullable String paymentDeniedMessage);
@@ -234,6 +248,7 @@ public interface Options {
 
     /**
      * @param teleportAnimation Whether there should be a teleport animation during teleport delay or not.
+     * @return This options-instance.
      */
     @NotNull
     Options setTeleportAnimation(boolean teleportAnimation);
@@ -246,6 +261,7 @@ public interface Options {
 
     /**
      * @param serverNotOnline The message that comes up if the target server is not online.
+     * @return This options-instance.
      */
     @NotNull
     Options setServerNotOnline(@Nullable String serverNotOnline);
@@ -257,6 +273,7 @@ public interface Options {
 
     /**
      * @param publicAnimations Whether the teleport animation will be shown for the entire server or just the teleporting player.
+     * @return This options-instance.
      */
     @NotNull
     Options setPublicAnimations(boolean publicAnimations);
@@ -269,6 +286,7 @@ public interface Options {
 
     /**
      * @param cancelSound The new cancel sound.
+     * @return This options-instance.
      */
     @NotNull
     Options setCancelSound(@Nullable SoundData cancelSound);
@@ -284,4 +302,32 @@ public interface Options {
      */
     @NotNull
     Options setDelay(int delay);
+
+    /**
+     * @return Whether the player should recveive invulnerability after teleport or not.
+     */
+    boolean withPostInvulnerability();
+
+    /**
+     * @return The invulnerability time after teleport.
+     */
+    float postInvulnerabilityDuration();
+
+    /**
+     * PREMIUM-FEATURE This is a premium feature and therefore will not work if you are using the free version.
+     *
+     * @param withPostInvulnerability Whether the player should recveive invulnerability after teleport or not.
+     * @return This options-instance.
+     */
+    @NotNull
+    Options setWithPostInvulnerability(boolean withPostInvulnerability);
+
+    /**
+     * PREMIUM-FEATURE This is a premium feature and therefore will not work if you are using the free version.
+     *
+     * @param postInvulnerabilityDuration The invulnerability time after teleport.
+     * @return This options-instance.
+     */
+    @NotNull
+    Options setPostInvulnerabilityDuration(boolean postInvulnerabilityDuration);
 }
