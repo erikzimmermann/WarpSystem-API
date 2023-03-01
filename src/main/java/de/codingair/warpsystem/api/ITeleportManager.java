@@ -5,6 +5,7 @@ import de.codingair.warpsystem.api.destinations.utils.Result;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.Map;
@@ -46,10 +47,17 @@ public interface ITeleportManager {
     @Unmodifiable Map<String, Set<String>> globalWorlds();
 
     /**
-     * @return A map containing all simple warp names and their corresponding location available on this server.
+     * @return A set of all simple warp names available on this server.
      */
     @NotNull
-    @Unmodifiable Map<String, Location> simpleWarps();
+    @Unmodifiable Set<String> simpleWarps();
+
+    /**
+     * @param id The id of the simple warp.
+     * @return The location of the given simple warp if available.
+     */
+    @Nullable
+    Location simpleWarp(@NotNull String id);
 
     /**
      * @return A map containing all global warp names and their corresponding server name available on the entire network.
