@@ -41,10 +41,10 @@ public interface ITeleportManager {
     @Unmodifiable Set<String> servers();
 
     /**
-     * @return A map containing all available worlds on the entire proxy. This is used for providing world name suggestions for the random teleport command.
+     * @return A map containing all available server names and their worlds on the entire proxy. This is used for providing world name suggestions for the random teleport command.
      */
     @NotNull
-    @Unmodifiable Map<String, Set<String>> globalWorlds();
+    @Unmodifiable Map<String, Set<String>> worlds();
 
     /**
      * @return A set of all simple warp names available on this server.
