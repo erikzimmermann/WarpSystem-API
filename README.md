@@ -1,6 +1,6 @@
 # WarpSystem-API
 [![](https://jitpack.io/v/CodingAir/WarpSystem-API.svg)](https://jitpack.io/#CodingAir/WarpSystem-API)  
-The corresponding API to [WarpSystem](https://github.com/CodingAir/WarpSystem-IssueTracker) v5.1.4 and above.  
+The corresponding API to [WarpSystem](https://github.com/CodingAir/WarpSystem-IssueTracker) v5.1.6 and above.  
 
 ### Maven 
 ```xml
@@ -12,7 +12,7 @@ The corresponding API to [WarpSystem](https://github.com/CodingAir/WarpSystem-Is
 <dependency>  
   <groupId>com.github.CodingAir</groupId>
   <artifactId>WarpSystem-API</artifactId>
-  <version>5.1.4</version>
+  <version>5.1.6</version>
   <scope>provided</scope>
 </dependency>
 
@@ -20,7 +20,7 @@ The corresponding API to [WarpSystem](https://github.com/CodingAir/WarpSystem-Is
 <dependency>
     <groupId>com.github.CodingAir</groupId>
     <artifactId>CodingAPI</artifactId>
-    <version>1.60</version>
+    <version>1.64</version>
     <scope>provided</scope>
 </dependency>
 ```

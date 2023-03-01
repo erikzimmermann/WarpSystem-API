@@ -6,7 +6,7 @@
 
     <groupId>com.github.CodingAir</groupId>
     <artifactId>WarpSystem-API</artifactId>
-    <version>5.1.4</version>
+    <version>5.1.6</version>
 
     <repositories>
         <repository>
@@ -41,13 +41,13 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.17.1-R0.1-SNAPSHOT</version>
+            <version>1.18-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.github.CodingAir</groupId>
             <artifactId>CodingAPI</artifactId>
-            <version>1.35</version>
+            <version>1.64</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
