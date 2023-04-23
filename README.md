@@ -2,6 +2,10 @@
 [![](https://jitpack.io/v/CodingAir/WarpSystem-API.svg)](https://jitpack.io/#CodingAir/WarpSystem-API)  
 The corresponding API to [WarpSystem](https://github.com/CodingAir/WarpSystem-IssueTracker) v5.1.6 and above.  
 
+## Setup
+
+In order to make your plugin compatible with WarpSystem, you need to compile it with the CodingAPI besides WarpSystem-API. Important is, that WarpSystem **relocates** their dependencies. So you need to relocate the CodingAPI as well. Make sure NOT to include both APIs in your plugin.
+
 ### Maven 
 ```xml
 <repository>
@@ -16,16 +20,71 @@ The corresponding API to [WarpSystem](https://github.com/CodingAir/WarpSystem-Is
   <scope>provided</scope>
 </dependency>
 
-<!-- Important: This API is necessary for compiling your plugin -->
 <dependency>
     <groupId>com.github.CodingAir</groupId>
     <artifactId>CodingAPI</artifactId>
-    <version>1.64</version>
+    <version>1.67</version>
     <scope>provided</scope>
 </dependency>
+
+<plugins>
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.3</version>
+    
+        <configuration>
+            <relocations>
+                <relocation>
+                    <pattern>de.codingair.codingapi</pattern>
+                    <shadedPattern>de.codingair.warpsystem.lib.codingapi</shadedPattern>
+                </relocation>
+            </relocations>
+        </configuration>
+    
+        <executions>
+            <execution>
+                <phase>package</phase>
+                <goals>
+                    <goal>shade</goal>
+                </goals>
+            </execution>
+        </executions>
+    </plugin>
+</plugins>
 ```
 
-### Event List
+### Gradle
+
+```gradle
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version "7.1.2"
+}
+
+repositories {
+    ...
+    maven { url 'https://jitpack.io' }
+    ...
+}
+
+dependencies {
+    ...
+    compileOnly 'com.github.CodingAir:WarpSystem-API:5.1.6'
+    compileOnly 'com.github.CodingAir:CodingAPI:1.67'
+    ...
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+}
+
+shadowJar {
+    relocate 'de.codingair.codingapi', 'de.codingair.warpsystem.lib.codingapi'
+}
+```
+
+## API
 * [AsyncPlayerTeleportEvent](https://github.com/CodingAir/WarpSystem-API/blob/master/src/main/java/de/codingair/warpsystem/api/events/AsyncPlayerTeleportEvent.java)
 
 ### Event example
